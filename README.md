@@ -39,23 +39,84 @@ At a minimum:
 When you're done, push your code to a GitHub repository and send us the link. Also, please include a brief write-up in a README on what else you'd want to improve or add if you were going to spend more time on it, along with instructions for building and executing the program on either Linux or MacOS.
 
 
+### Thoughts on approach to challenge
 
-Things you may want to cover:
+I am using Rails to create the API application (https://guides.rubyonrails.org/api_app.html)
+At first I thought not to use Rails, as it appears to be so "dev bootcampy" but I am
+1) comfortable with Ruby and Rails, this approach gives me a lot so I can
+2) focus on the challenge at hand.
 
-* Ruby version
+So the first thing I think about, after reading the challenge, is about the data I am to work with.
 
-* System dependencies
+I look at the .csv and start designing the data schema.
 
-* Configuration
+I see two distinct models in the data - Organization and Category
 
-* Database creation
+So let's start with the data.
+Create the models and let's store the data from the .csv into a database.
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+I started with a Category and Organizations model with a many-to-many relation between
+the two, but after reading the task once again decided to make this very simple
+and have the category just be an attribute of the Organization model.
 
-* Deployment instructions
+This is one thing that I would improve on to allow more than one category per organization
+but let's focus on the task at hand - creating the api with filters.
 
-* ...
+
+
+I've normalized the data from the csv
+(titleized the values, change "NULL" to null, stripped whitespace)
+and did not import duplicate records (name, postal, and category all match)
+I think it is clear in the challenge that id is not a field to be used
+as a query parameter, at least I read that as that field does not have a //
+after the value and who would actually know the identifier.
+If a client requested an organization with an id filter I would expect that
+client to be using a different endpoint than "/organizations"
+more like "/organizations/:id"
+
+The data loader outputs all invalid records to a data/import_errors file
+so we know which records were not imported.
+
+
+
+The "/organizations" endpoint is a simple query to the database with an
+optional SQL where clause or order clause based on the URL query parameters.
+
+It is not dynamically extensible but I think that the organization filters are
+clearly laid out. This might be another thing to improve. 
+
+## Prerequisites
+
+This is a Ruby application and you will need this language runtime. 
+
+The application was developed and tested to the version of ruby in the `.ruby-version` file.
+
+A package manager is preferred so that the `.ruby-version` file is recognized but there is nothing 
+version specific about this application so any recent Ruby version should work.
+
+See https://www.ruby-lang.org/en/documentation/installation/ on instructions for your Operating System.
+
+Also this application does require a few gems and frameworks, I did choose a Rails app, so after installing Ruby
+you will need the dependency management gem `bundler`
+
+Running `gem install bundler` should suffice. 
+
+Finally running `./bin/setup` will create all the rest of the necessary pieces. 
+
+## Usage
+
+`./bin/rails server` will get the application running on port `:3000`. 
+
+Open a browser or make a command line request (e.g. curl) to 
+[http://localhost:3000/organizations](http://localhost:3000/organizations) 
+to see the json output from the "/organizations" endpoint.
+
+Add query parameters to verify filtering and ordering/sorting. 
+
+## Test suite and code coverage
+
+`bundle exec rspec spec` will run the test suite and output the tests.
+
+`open coverage/index.html` will open a browser with the test coverage.
