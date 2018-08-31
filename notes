@@ -1,0 +1,18 @@
+Thoughts on approach to challenge
+
+I am using Rails to create the API application (https://guides.rubyonrails.org/api_app.html)
+At first I thought not to use Rails, as it appears to be so "dev bootcampy" but I am
+1) comfortable with Ruby and Rails, this approach gives me a lot so I can
+2) focus on the challenge at hand.
+
+So the first thing I think about, after reading the challenge, is about the data I am to work with.
+
+I look at the .csv and start designing the data schema.
+
+I see two distinct models in the data - Organization and Category
+
+So let's start with the data.
+Create the models and let's store the data from the .csv into a database.
+
+
+
