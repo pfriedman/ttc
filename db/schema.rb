@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 20180831042554) do
     t.string "name"
     t.string "city"
     t.string "state"
-    t.string "postal_code"
+    t.string "postal"
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_organizations_on_category"
-    t.index ["name", "postal_code", "category"], name: "index_organizations_on_name_and_postal_code_and_category", unique: true
-    t.index ["postal_code"], name: "index_organizations_on_postal_code"
+    t.index ["name", "postal", "category"], name: "index_organizations_on_name_and_postal_and_category", unique: true
+    t.index ["postal"], name: "index_organizations_on_postal"
     t.index ["state"], name: "index_organizations_on_state"
   end
 

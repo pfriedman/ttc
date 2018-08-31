@@ -22,17 +22,17 @@ class OrganizationLoader
     o.id = row[:id].to_i
     o.name = normalize(row[:name])
     o.city = normalize(row[:city])
-    o.state = normalize(row[:state])
-    o.postal_code = normalize(row[:postal])
+    o.state = normalize(row[:state], :upcase)
+    o.postal = normalize(row[:postal])
     o.category = normalize(row[:category])
     o.save!
   rescue ActiveRecord::RecordInvalid => e
     @errors << "[#{e.message}] #{row.inspect}"
   end
 
-  def self.normalize(value)
+  def self.normalize(value, method = :titleize)
     return nil if value == "NULL"
-    value.strip.titleize
+    value.strip.send(method)
   end
 
   def self.write_errors

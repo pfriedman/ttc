@@ -25,7 +25,7 @@ RSpec.describe OrganizationLoader do
 
       it 'turns "NULL" to nil' do
         o = Organization.find(19)
-        [:city, :state, :postal_code].each do |attribute|
+        [:city, :state, :postal].each do |attribute|
           expect(o.send(attribute)).to be nil
         end
       end

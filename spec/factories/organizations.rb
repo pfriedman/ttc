@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :organization do
-    name 'Michigan Science Center'
+    sequence(:name) { |i| "Org #{i}" }
     city 'Detroit'
     state 'MI'
-    postal_code '48202'
+    postal '48202'
     category 'Non-Profit'
   end
 end
