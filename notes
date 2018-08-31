@@ -14,5 +14,28 @@ I see two distinct models in the data - Organization and Category
 So let's start with the data.
 Create the models and let's store the data from the .csv into a database.
 
+I started with a Category and Organizations model with a many-to-many relation between
+the two, but after reading the task once again decided to make this very simple
+and have the category just be an attribute of the Organization model.
+
+This is one thing that I would improve on to allow more than one category per organization
+but let's focus on the task at hand - creating the api with filters.
+
+I've normalized the data from the csv
+(titleized the values, change "NULL" to null, stripped whitespace)
+and did not import duplicate records (name, postal, and category all match)
+I think it is clear in the challenge that id is not a field to be used
+as a query parameter, at least I read that as that field does not have a //
+after the value and who would actually know the identifier.
+If a client requested an organization with an id filter I would expect that
+client to be using a different endpoint than "/organizations"
+more like "/organizations/:id"
+
+The data loader outputs all invalid records to a data/import_errors file
+so we know which records were not imported.
+
+
+
+
 
 

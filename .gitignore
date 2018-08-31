@@ -25,3 +25,4 @@
 
 # Ignore test artifacts
 coverage
+data/import_errors
